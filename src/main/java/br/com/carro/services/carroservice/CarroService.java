@@ -8,4 +8,8 @@ public interface CarroService {
 
     public List<Carro> carrosList();
 
+    public Carro save(Carro newCarro);
+
+    public void deleteCarro()
+
 }
