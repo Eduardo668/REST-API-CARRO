@@ -1,5 +1,7 @@
 package br.com.carro.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -19,7 +21,7 @@ public class Carro {
     @NotNull
     private String marca;
 
-    @Size(max = 100)
+
     @NotNull
     private double preco;
 
@@ -27,12 +29,21 @@ public class Carro {
     @NotNull
     private String modelo;
 
-    @ManyToMany
-    @JoinColumn(name = "concessionaria_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "concessionaria_id")
+    @JsonBackReference
     private Concessionaria concessionaria;
 
     public Long getId() {
         return id;
+    }
+
+    public Concessionaria getConcessionaria() {
+        return concessionaria;
+    }
+
+    public void setConcessionaria(Concessionaria concessionaria) {
+        this.concessionaria = concessionaria;
     }
 
     public void setId(Long id) {

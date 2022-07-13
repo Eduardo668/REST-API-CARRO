@@ -8,8 +8,13 @@ public interface CarroService {
 
     public List<Carro> carrosList();
 
-    public Carro save(Carro newCarro);
+    public Carro createCar(Carro newCarro);
 
-    public void deleteCarro()
+    public void deleteCar(Long id);
+
+    public Carro updateCarro(Long id, Carro updateCarro);
+
+    public void saveCarroInConcessionaria(Long carro_id, Long concessionaria_id);
+
 
 }

@@ -1,5 +1,7 @@
 package br.com.carro.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -13,7 +15,13 @@ public class Usuario {
 
     @Size(max = 100)
     @NotNull
-    private String nome;
+    private String fullname;
+
+    @Size(max = 100)
+    @NotNull
+    private String username;
+
+
 
     @Size(max = 100)
     @NotNull
@@ -23,17 +31,10 @@ public class Usuario {
     @NotNull
     private String password;
 
-    @ManyToMany
-    @JoinColumn(name = "concessionaria_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "concessionaria_id", nullable = true)
+    @JsonBackReference
     private Concessionaria concessionaria;
-
-    public Concessionaria getConcessionaria() {
-        return concessionaria;
-    }
-
-    public void setConcessionaria(Concessionaria concessionaria) {
-        this.concessionaria = concessionaria;
-    }
 
     public Long getId() {
         return id;
@@ -43,12 +44,20 @@ public class Usuario {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getUsername() {
+        return username;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
     }
 
     public String getEmail() {
@@ -65,5 +74,13 @@ public class Usuario {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Concessionaria getConcessionaria() {
+        return concessionaria;
+    }
+
+    public void setConcessionaria(Concessionaria concessionaria) {
+        this.concessionaria = concessionaria;
     }
 }
